@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Download, ChevronRight } from "lucide-react";
@@ -13,6 +15,8 @@ const navItems = [
   { name: "Contact", href: "#contact" },
 ];
 
+const CV_PATH = "/Eranga_Kavishanka_CV.pdf"; // ✅ file inside /public
+
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -22,7 +26,6 @@ export const Navbar = () => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
 
-      // Update active section based on scroll position
       const sections = navItems.map((item) => item.href.slice(1));
       for (const section of sections.reverse()) {
         const element = document.getElementById(section);
@@ -37,14 +40,13 @@ export const Navbar = () => {
     };
 
     window.addEventListener("scroll", handleScroll);
+    handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    if (element) element.scrollIntoView({ behavior: "smooth" });
     setIsMobileMenuOpen(false);
   };
 
@@ -88,7 +90,7 @@ export const Navbar = () => {
                   }}
                   initial={{ opacity: 0, y: -20 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{ delay: index * 0.08 }}
                   className={`px-4 py-2 text-sm font-medium transition-colors duration-200 rounded-lg ${
                     activeSection === item.href.slice(1)
                       ? "text-primary bg-primary/10"
@@ -100,11 +102,13 @@ export const Navbar = () => {
               ))}
             </div>
 
-            {/* CTA Button */}
+            {/* ✅ Desktop Download CV */}
             <div className="hidden lg:block">
-              <Button variant="hero" size="default" className="gap-2">
-                <Download className="w-4 h-4" />
-                Download CV
+              <Button asChild variant="hero" size="default" className="gap-2">
+                <a href={CV_PATH} download>
+                  <Download className="w-4 h-4" />
+                  Download CV
+                </a>
               </Button>
             </div>
 
@@ -112,6 +116,7 @@ export const Navbar = () => {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 text-foreground hover:bg-secondary/50 rounded-lg transition-colors"
+              aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? (
                 <X className="w-6 h-6" />
@@ -166,10 +171,14 @@ export const Navbar = () => {
                   </motion.a>
                 ))}
               </div>
+
+              {/* ✅ Mobile Download CV */}
               <div className="mt-6">
-                <Button variant="hero" size="lg" className="w-full gap-2">
-                  <Download className="w-4 h-4" />
-                  Download CV
+                <Button asChild variant="hero" size="lg" className="w-full gap-2">
+                  <a href={CV_PATH} download onClick={() => setIsMobileMenuOpen(false)}>
+                    <Download className="w-4 h-4" />
+                    Download CV
+                  </a>
                 </Button>
               </div>
             </motion.div>

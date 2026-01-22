@@ -96,7 +96,7 @@ export const HeroSection = () => {
               <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/50 shadow-2xl shadow-primary/30">
                 <motion.img
                   src={'profileImage.jpg'}
-                  alt="Eranga Kavishanka"
+                  alt="Eranga Kavisanka"
                   initial={{ scale: 1.25 }}
                   animate={{ scale: 1.35 }}
                   whileHover={{ scale: 1.45 }}
@@ -130,7 +130,7 @@ export const HeroSection = () => {
               transition={{ duration: 0.6 }}
               className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4"
             >
-              Hi, I'm <span className="gradient-text">Eranga Kavishanka</span>
+              Hi, I'm <span className="gradient-text">Eranga Kavisanka</span>
             </motion.h1>
 
             <motion.div
