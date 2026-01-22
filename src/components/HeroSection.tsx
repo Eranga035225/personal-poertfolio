@@ -1,8 +1,9 @@
+"use client";
+
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowDown, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import profileImage from "@/assets/profile.jpg";
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 
 const floatingIcons = [
   { icon: "⚛️", delay: 0, x: "10%", y: "20%" },
@@ -33,10 +34,8 @@ export const HeroSection = () => {
   }, []);
 
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: "smooth" });
-    }
+    const el = document.querySelector(href);
+    if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
   return (
@@ -44,22 +43,19 @@ export const HeroSection = () => {
       id="home"
       className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
     >
-      {/* Animated Background */}
+      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-accent/10 via-transparent to-transparent" />
       </div>
 
       {/* Floating Icons */}
-      {floatingIcons.map((item, index) => (
+      {floatingIcons.map((item, i) => (
         <motion.div
-          key={index}
+          key={i}
           className="absolute text-3xl md:text-4xl opacity-20"
           style={{ left: item.x, top: item.y }}
-          animate={{
-            y: [0, -20, 0],
-            rotate: [0, 10, -10, 0],
-          }}
+          animate={{ y: [0, -20, 0], rotate: [0, 10, -10, 0] }}
           transition={{
             duration: 6,
             delay: item.delay,
@@ -71,44 +67,54 @@ export const HeroSection = () => {
         </motion.div>
       ))}
 
-      {/* Grid Pattern */}
+      {/* Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,hsl(var(--border))_1px,transparent_1px),linear-gradient(to_bottom,hsl(var(--border))_1px,transparent_1px)] bg-[size:4rem_4rem] opacity-20" />
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
-          {/* Profile Image */}
+        <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
+
+          {/* ===== PROFILE IMAGE ===== */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.85 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.8 }}
             className="relative"
           >
             <div className="relative w-64 h-64 lg:w-80 lg:h-80">
-              {/* Glow Effect */}
+
+              {/* Glow */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-2xl opacity-30 animate-pulse" />
-              
-              {/* Rotating Border */}
+
+              {/* Rotating border */}
               <motion.div
-                className="absolute inset-0 rounded-full border-2 border-dashed border-primary/30"
+                className="absolute inset-0 rounded-full border-2 border-dashed border-primary/40"
                 animate={{ rotate: 360 }}
                 transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
               />
-              
-              {/* Image Container */}
-              <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/50 shadow-2xl shadow-primary/20">
-                <img
-                  src={profileImage}
-                  alt="Profile"
-                  className="w-full h-full object-cover"
+
+              {/* Image */}
+              <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/50 shadow-2xl shadow-primary/30">
+                <motion.img
+                  src={'profileImage.jpg'}
+                  alt="Eranga Kavishanka"
+                  initial={{ scale: 1.25 }}
+                  animate={{ scale: 1.35 }}
+                  whileHover={{ scale: 1.45 }}
+                  transition={{ duration: 1.2, ease: "easeOut" }}
+                  className="
+                    w-full h-full 
+                    object-cover 
+                    object-[center_20%]
+                  "
                 />
               </div>
 
-              {/* Status Badge */}
+              {/* Status */}
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
-                transition={{ delay: 0.5, type: "spring" }}
-                className="absolute bottom-4 right-4 bg-card/90 backdrop-blur-sm border border-border rounded-full px-4 py-2 flex items-center gap-2"
+                transition={{ delay: 0.6, type: "spring" }}
+                className="absolute bottom-4 right-4 bg-card/90 backdrop-blur border border-border rounded-full px-4 py-2 flex items-center gap-2"
               >
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
                 <span className="text-sm font-medium">Available</span>
@@ -116,22 +122,21 @@ export const HeroSection = () => {
             </div>
           </motion.div>
 
-          {/* Hero Content */}
+          {/* ===== CONTENT ===== */}
           <div className="flex-1 text-center lg:text-left">
             <motion.h1
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.2 }}
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 leading-tight"
+              transition={{ duration: 0.6 }}
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4"
             >
-              Hi, I'm{" "}
-              <span className="gradient-text">Eranga Kavisanka</span>
+              Hi, I'm <span className="gradient-text">Eranga Kavishanka</span>
             </motion.h1>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.3 }}
+              transition={{ delay: 0.2 }}
               className="text-lg md:text-xl text-primary font-medium mb-4 h-8"
             >
               <AnimatePresence mode="wait">
@@ -141,7 +146,6 @@ export const HeroSection = () => {
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.4 }}
-                  className="inline-block"
                 >
                   {roles[currentRoleIndex]}
                 </motion.span>
@@ -149,18 +153,19 @@ export const HeroSection = () => {
             </motion.div>
 
             <motion.p
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.4 }}
+              transition={{ delay: 0.3 }}
               className="text-muted-foreground text-lg max-w-2xl mb-8"
             >
-              A passionate Software Engineering undergraduate building scalable, secure, and impactful systems.
+              A passionate Software Engineering undergraduate building scalable,
+              secure, and impactful systems.
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
+              transition={{ delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
               <Button
@@ -169,8 +174,7 @@ export const HeroSection = () => {
                 onClick={() => scrollToSection("#projects")}
                 className="gap-2"
               >
-                View Projects
-                <ExternalLink className="w-5 h-5" />
+                View Projects <ExternalLink className="w-5 h-5" />
               </Button>
               <Button
                 variant="heroOutline"
@@ -182,29 +186,11 @@ export const HeroSection = () => {
                 Contact Me
               </Button>
             </motion.div>
-
-            {/* Stats */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 }}
-              className="flex gap-8 mt-12 justify-center lg:justify-start"
-            >
-              {[
-                { value: "50+", label: "Projects Completed" },
-                { value: "10+", label: "Tech Stacks" },
-              ].map((stat, index) => (
-                <div key={index} className="text-center">
-                  <div className="text-3xl font-bold gradient-text">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
-                </div>
-              ))}
-            </motion.div>
           </div>
         </div>
       </div>
 
-      {/* Scroll Indicator */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -215,7 +201,7 @@ export const HeroSection = () => {
           onClick={() => scrollToSection("#services")}
           animate={{ y: [0, 10, 0] }}
           transition={{ duration: 1.5, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary transition-colors"
+          className="flex flex-col items-center gap-2 text-muted-foreground hover:text-primary"
         >
           <span className="text-sm">Scroll Down</span>
           <ArrowDown className="w-5 h-5" />
@@ -224,3 +210,5 @@ export const HeroSection = () => {
     </section>
   );
 };
+
+export default HeroSection;
