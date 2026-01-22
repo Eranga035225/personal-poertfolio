@@ -1,9 +1,9 @@
 "use client";
 
-import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useMemo, useState } from "react";
+import { motion } from "framer-motion";
 import { ArrowDown, ExternalLink, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState } from "react";
 
 const floatingIcons = [
   { icon: "⚛️", delay: 0, x: "10%", y: "20%" },
@@ -23,26 +23,67 @@ const roles = [
   "AI/ML Researcher",
 ];
 
-export const HeroSection = () => {
-  const [currentRoleIndex, setCurrentRoleIndex] = useState(0);
+// ✅ Smooth typing hook (type → pause → delete → next)
+function useTypewriter(words: string[], opts?: { typeSpeed?: number; deleteSpeed?: number; holdMs?: number }) {
+  const typeSpeed = opts?.typeSpeed ?? 55;
+  const deleteSpeed = opts?.deleteSpeed ?? 28;
+  const holdMs = opts?.holdMs ?? 900;
+
+  const [index, setIndex] = useState(0);
+  const [text, setText] = useState("");
+  const [isDeleting, setIsDeleting] = useState(false);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentRoleIndex((prev) => (prev + 1) % roles.length);
-    }, 2500);
-    return () => clearInterval(interval);
-  }, []);
+    const currentWord = words[index] ?? "";
+    let timer: number;
+
+    // when finished typing -> hold then start deleting
+    if (!isDeleting && text === currentWord) {
+      timer = window.setTimeout(() => setIsDeleting(true), holdMs);
+      return () => window.clearTimeout(timer);
+    }
+
+    // when finished deleting -> move to next word
+    if (isDeleting && text === "") {
+      setIsDeleting(false);
+      setIndex((prev) => (prev + 1) % words.length);
+      return;
+    }
+
+    // typing/deleting step
+    timer = window.setTimeout(() => {
+      const next = isDeleting
+        ? currentWord.substring(0, Math.max(0, text.length - 1))
+        : currentWord.substring(0, Math.min(currentWord.length, text.length + 1));
+      setText(next);
+    }, isDeleting ? deleteSpeed : typeSpeed);
+
+    return () => window.clearTimeout(timer);
+  }, [text, isDeleting, index, words, typeSpeed, deleteSpeed, holdMs]);
+
+  return { text, index };
+}
+
+export const HeroSection = () => {
+  const { text: roleText } = useTypewriter(roles, {
+    typeSpeed: 55,     // ⬅️ typing speed
+    deleteSpeed: 28,   // ⬅️ deleting speed
+    holdMs: 900,       // ⬅️ pause when full word typed
+  });
 
   const scrollToSection = (href: string) => {
     const el = document.querySelector(href);
     if (el) el.scrollIntoView({ behavior: "smooth" });
   };
 
+  // Keeps the line height stable even when deleting
+  const placeholder = useMemo(() => {
+    const longest = roles.reduce((a, b) => (a.length > b.length ? a : b), "");
+    return longest;
+  }, []);
+
   return (
-    <section
-      id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
-    >
+    <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
@@ -56,12 +97,7 @@ export const HeroSection = () => {
           className="absolute text-3xl md:text-4xl opacity-20"
           style={{ left: item.x, top: item.y }}
           animate={{ y: [0, -20, 0], rotate: [0, 10, -10, 0] }}
-          transition={{
-            duration: 6,
-            delay: item.delay,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          transition={{ duration: 6, delay: item.delay, repeat: Infinity, ease: "easeInOut" }}
         >
           {item.icon}
         </motion.div>
@@ -72,7 +108,6 @@ export const HeroSection = () => {
 
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="flex flex-col lg:flex-row items-center gap-14 lg:gap-20">
-
           {/* ===== PROFILE IMAGE ===== */}
           <motion.div
             initial={{ opacity: 0, scale: 0.85 }}
@@ -81,7 +116,6 @@ export const HeroSection = () => {
             className="relative"
           >
             <div className="relative w-64 h-64 lg:w-80 lg:h-80">
-
               {/* Glow */}
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-primary to-accent blur-2xl opacity-30 animate-pulse" />
 
@@ -95,17 +129,13 @@ export const HeroSection = () => {
               {/* Image */}
               <div className="absolute inset-4 rounded-full overflow-hidden border-4 border-primary/50 shadow-2xl shadow-primary/30">
                 <motion.img
-                  src={'profileImage.jpg'}
+                  src={"profileImage.jpg"}
                   alt="Eranga Kavisanka"
                   initial={{ scale: 1.25 }}
                   animate={{ scale: 1.35 }}
                   whileHover={{ scale: 1.45 }}
                   transition={{ duration: 1.2, ease: "easeOut" }}
-                  className="
-                    w-full h-full 
-                    object-cover 
-                    object-[center_20%]
-                  "
+                  className="w-full h-full object-cover object-[center_20%]"
                 />
               </div>
 
@@ -133,23 +163,28 @@ export const HeroSection = () => {
               Hi, I'm <span className="gradient-text">Eranga Kavisanka</span>
             </motion.h1>
 
+            {/* ✅ Smooth typewriter role */}
             <motion.div
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-primary font-medium mb-4 h-8"
+              className="text-lg md:text-xl text-primary font-medium mb-4"
             >
-              <AnimatePresence mode="wait">
-                <motion.span
-                  key={currentRoleIndex}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  exit={{ opacity: 0, y: -20 }}
-                  transition={{ duration: 0.4 }}
-                >
-                  {roles[currentRoleIndex]}
-                </motion.span>
-              </AnimatePresence>
+              {/* Placeholder keeps width stable (no layout jump) */}
+              <span className="relative inline-block">
+                <span className="invisible">{placeholder}</span>
+                <span className="absolute left-0 top-0">
+                  {roleText}
+                  {/* Cursor */}
+                  <motion.span
+                    className="inline-block ml-1"
+                    animate={{ opacity: [0, 1, 0] }}
+                    transition={{ duration: 1, repeat: Infinity, ease: "easeInOut" }}
+                  >
+                    |
+                  </motion.span>
+                </span>
+              </span>
             </motion.div>
 
             <motion.p
@@ -158,8 +193,7 @@ export const HeroSection = () => {
               transition={{ delay: 0.3 }}
               className="text-muted-foreground text-lg max-w-2xl mb-8"
             >
-              A passionate Software Engineering undergraduate building scalable,
-              secure, and impactful systems.
+              A passionate Software Engineering undergraduate building scalable, secure, and impactful systems.
             </motion.p>
 
             <motion.div
@@ -168,20 +202,11 @@ export const HeroSection = () => {
               transition={{ delay: 0.4 }}
               className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
             >
-              <Button
-                variant="hero"
-                size="xl"
-                onClick={() => scrollToSection("#projects")}
-                className="gap-2"
-              >
+              <Button variant="hero" size="xl" onClick={() => scrollToSection("#projects")} className="gap-2">
                 View Projects <ExternalLink className="w-5 h-5" />
               </Button>
-              <Button
-                variant="heroOutline"
-                size="xl"
-                onClick={() => scrollToSection("#contact")}
-                className="gap-2"
-              >
+
+              <Button variant="heroOutline" size="xl" onClick={() => scrollToSection("#contact")} className="gap-2">
                 <Mail className="w-5 h-5" />
                 Contact Me
               </Button>
