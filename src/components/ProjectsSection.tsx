@@ -249,17 +249,24 @@ export const ProjectsSection = () => {
         </div>
 
         {/* View All Button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.4 }}
-          className="text-center mt-12"
-        >
-          <Button variant="heroOutline" size="lg">
-            View All Projects
-          </Button>
-        </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true }}
+  transition={{ delay: 0.4 }}
+  className="text-center mt-12"
+>
+  <Button variant="heroOutline" size="lg" asChild>
+    <a
+      href="https://github.com/Eranga035225"
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      View All Projects
+    </a>
+  </Button>
+</motion.div>
+
       </div>
     </section>
   );
