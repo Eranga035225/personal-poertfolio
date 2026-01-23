@@ -16,8 +16,8 @@ const floatingIcons = [
 
 const roles = [
   "Software Engineer",
-  "Cloud Engineer",
-  "DevOps Engineer",
+  "Cloud & DevOps Engineer",
+  "Aviatrix Certified Engineer",
   "Full Stack Developer",
   "Mobile App Developer",
   "AI/ML Researcher",
