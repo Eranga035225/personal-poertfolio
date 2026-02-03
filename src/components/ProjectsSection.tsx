@@ -23,8 +23,8 @@ const projects = [
       "Full-stack MERN e-commerce platform for a cosmetics brand with product listings, shopping cart, secure JWT authentication, and role-based admin dashboard.",
     image: projectCrystalBeauty,
     tags: ["MongoDB", "Express.js", "React", "Node.js", "Tailwind CSS"],
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://crystal-beauty.netlify.app/",
+    githubUrl: "https://github.com/Eranga035225/cbc-frontend.git",
   },
   {
     title: "Sekin Express – Delivery System",
@@ -32,8 +32,8 @@ const projects = [
       "Complete delivery management system with real-time parcel tracking, role-based panels (Super Admin, Admin, Driver, User), and dynamic cost calculation.",
     image: projectSekinExpress,
     tags: ["Laravel", "PHP", "MySQL", "REST APIs", "Bootstrap"],
-    liveUrl: "#",
-    githubUrl: "#",
+    liveUrl: "https://www.sekinexpress.com/",
+    githubUrl: "https://github.com/Eranga035225/webSystem-for-a-delivery-service.git",
   },
   {
     title: "Exclusive – Secure E-Commerce",
@@ -41,8 +41,7 @@ const projects = [
       "Secure e-commerce web application with Stripe payments, product reviews, order management, and admin panel. Tested using SAST, DAST security techniques.",
     image: projectExclusive,
     tags: ["Laravel", "PHP", "Stripe", "MySQL", "Security Testing"],
-    liveUrl: "#",
-    githubUrl: "#",
+    githubUrl: "https://github.com/Eranga035225/Secured-Ecommerce-system.git",
   },
   {
     title: "MediLink – E-Channeling System",
