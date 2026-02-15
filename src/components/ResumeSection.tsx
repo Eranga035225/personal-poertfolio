@@ -50,6 +50,7 @@ const education = [
 ];
 
 const certifications = [
+  "AWS Certified Cloud Practitioner - Amazon Web Services",
   "Multicloud Network Associate Badge - Aviatrix",
   "Full Stack Web Development - Skyrek",
   "Flutter Certificate Course - Ceylon Edge",
