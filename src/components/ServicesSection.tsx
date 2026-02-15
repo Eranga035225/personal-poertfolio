@@ -2,6 +2,28 @@ import { motion } from "framer-motion";
 import { Code, Cloud, Smartphone, Brain, Icon } from "lucide-react";
 
 const services = [
+    {
+    icon: Cloud,
+    title: "DevOps Engineer",
+    description:
+      "Designing cloud infrastructure on AWS, Azure, and GCP with CI/CD pipelines and containerized deployments.",
+    gradient: "from-accent to-primary",
+  },
+    {
+    icon: Cloud,
+    title: "AWS Certified Cloud Practitioner",
+    description:
+      "Proficient in AWS cloud services, architecture, and best practices for designing secure and scalable solutions.",
+    gradient: "from-accent to-primary",
+  },
+    {
+    icon: Cloud,
+    title: "Aviatrix Certified Multicloud Network Associate",
+    description:
+      "Expertise in multicloud networking, security, and automation across AWS, Azure, and GCP environments.",
+    gradient: "from-primary to-accent",
+  },
+
   {
     icon: Code,
     title: "Full Stack Developer",
@@ -10,20 +32,8 @@ const services = [
     gradient: "from-primary to-accent",
   },
   //Aws ccp
-  {
-    icon: Cloud,
-    title: "AWS Certified Cloud Practitioner",
-    description:
-      "Proficient in AWS cloud services, architecture, and best practices for designing secure and scalable solutions.",
-    gradient: "from-accent to-primary",
-  },
-  {
-    icon: Cloud,
-    title: "Cloud & DevOps Engineer",
-    description:
-      "Designing cloud infrastructure on AWS, Azure, and GCP with CI/CD pipelines and containerized deployments.",
-    gradient: "from-accent to-primary",
-  },
+
+
   {
     icon: Smartphone,
     title: "Mobile App Developer",
@@ -38,13 +48,7 @@ const services = [
       "Implementing machine learning models and AI-driven features to solve complex business problems.",
     gradient: "from-accent to-primary",
   },
-  {
-    icon: Cloud,
-    title: "Aviatrix Certified Multicloud Engineer",
-    description:
-      "Expertise in multicloud networking, security, and automation across AWS, Azure, and GCP environments.",
-    gradient: "from-primary to-accent",
-  },
+
 ];
 
 export const ServicesSection = () => {

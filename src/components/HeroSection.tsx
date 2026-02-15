@@ -20,7 +20,7 @@ const roles = [
   "Software Engineer",
   "AWS Certified Cloud Practitioner",
   "Cloud & DevOps Engineer",
-  "Aviatrix Certified Engineer",
+  "Multicloud Network Associate",
   "Full Stack Developer",
   "Mobile App Developer",
   "AI/ML Researcher",
