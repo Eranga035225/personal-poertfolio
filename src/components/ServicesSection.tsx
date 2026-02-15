@@ -9,6 +9,14 @@ const services = [
       "Designing cloud infrastructure on AWS, Azure, and GCP with CI/CD pipelines and containerized deployments.",
     gradient: "from-accent to-primary",
   },
+  //SRE
+  {
+    icon: Cloud,
+    title: "Site Reliability Engineer",
+    description:
+      "Ensuring high availability and performance of applications through monitoring, automation, and incident response.",
+    gradient: "from-primary to-accent",
+  },
     {
     icon: Cloud,
     title: "AWS Certified Cloud Practitioner",
