@@ -1,5 +1,5 @@
 import { motion } from "framer-motion";
-import { Code, Cloud, Smartphone, Brain } from "lucide-react";
+import { Code, Cloud, Smartphone, Brain, Icon } from "lucide-react";
 
 const services = [
   {
@@ -8,6 +8,14 @@ const services = [
     description:
       "Building responsive, scalable web applications using modern technologies like React, Node.js, and TypeScript.",
     gradient: "from-primary to-accent",
+  },
+  //Aws ccp
+  {
+    icon: Cloud,
+    title: "AWS Certified Cloud Practitioner",
+    description:
+      "Proficient in AWS cloud services, architecture, and best practices for designing secure and scalable solutions.",
+    gradient: "from-accent to-primary",
   },
   {
     icon: Cloud,
