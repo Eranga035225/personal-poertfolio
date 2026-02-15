@@ -166,26 +166,30 @@ export const HeroSection = () => {
             </motion.h1>
 
             {/* Role Typewriter */}
-            <motion.div
-              initial={{ opacity: 0, y: 14 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-lg md:text-xl text-primary font-medium mb-4"
-            >
-              <span className="relative inline-block">
-                <span className="invisible">{placeholder}</span>
-                <span className="absolute left-0 top-0">
-                  {roleText}
-                  <motion.span
-                    className="ml-1"
-                    animate={{ opacity: [0, 1, 0] }}
-                    transition={{ duration: 1, repeat: Infinity }}
-                  >
-                    |
-                  </motion.span>
-                </span>
-              </span>
-            </motion.div>
+<motion.div
+  initial={{ opacity: 0, y: 14 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ delay: 0.2 }}
+  className="text-lg md:text-xl text-primary font-medium mb-4"
+>
+  <span className="relative inline-flex items-center leading-none h-[1.6em]">
+    {/* keeps width stable */}
+    <span className="invisible whitespace-nowrap">{placeholder}</span>
+
+    {/* typed text sits on the same baseline */}
+    <span className="absolute left-0 top-0 inline-flex items-center whitespace-nowrap leading-none">
+      <span>{roleText}</span>
+      <motion.span
+        className="ml-1 inline-block leading-none"
+        animate={{ opacity: [0, 1, 0] }}
+        transition={{ duration: 1, repeat: Infinity }}
+      >
+        |
+      </motion.span>
+    </span>
+  </span>
+</motion.div>
+
 
             <motion.p
               initial={{ opacity: 0, y: 20 }}
