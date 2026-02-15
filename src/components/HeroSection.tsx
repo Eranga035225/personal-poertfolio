@@ -18,6 +18,7 @@ const floatingIcons = [
 /* Roles for typewriter */
 const roles = [
   "Software Engineer",
+  "AWS Certified Cloud Practitioner",
   "Cloud & DevOps Engineer",
   "Aviatrix Certified Engineer",
   "Full Stack Developer",
