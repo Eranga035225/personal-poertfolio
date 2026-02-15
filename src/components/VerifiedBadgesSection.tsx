@@ -10,7 +10,7 @@ const badges = [
     link: "https://www.credly.com/badges/71295d36-d1e2-4b4e-9f35-5055d0844ca5/public_url",
   },
   {
-    title: "Aviatrix Certified Engineer",
+    title: "Aviatrix Certified Multicloud Network Associate",
     issuer: "Aviatrix",
     image: "/badges/aviatrix.png",
     link: "https://www.credly.com/badges/31ee830f-590c-4adf-ac08-9859363396b1/public_url",

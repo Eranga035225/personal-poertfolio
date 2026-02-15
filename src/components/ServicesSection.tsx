@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
-import { Code, Cloud, Smartphone, Brain, Icon } from "lucide-react";
+import { Code, Cloud, Smartphone, Brain, Cpu } from "lucide-react";
+
 
 const services = [
     {
@@ -56,6 +57,21 @@ const services = [
       "Implementing machine learning models and AI-driven features to solve complex business problems.",
     gradient: "from-accent to-primary",
   },
+  //IOT explorere
+
+
+
+{
+  icon: Cpu,
+  title: "IoT Explorer",
+  description:
+    "Designing and implementing IoT solutions for smart devices, sensors, and connected systems.",
+  gradient: "from-accent to-primary",
+}
+
+
+
+  
 
 ];
 
